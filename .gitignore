@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+
+# Node / JS / TS
+node_modules/
+dist/
+build/
+coverage/
+*.log
+
+# Env
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+**/.docker/
+
+# Misc
+tmp/

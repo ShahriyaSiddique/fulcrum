@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+# Treat lockfiles as text
+package-lock.json text
+pnpm-lock.yaml text
+yarn.lock text
