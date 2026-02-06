@@ -1,16 +1,30 @@
 # Fulcrum
 
-Fulcrum is an event-driven orchestration platform for distributed fulfillment workflows.
-It coordinates long-running processes across independent services (payments, inventory, warehousing, delivery)
-while remaining correct under retries, duplicate events, partial failures, and eventual consistency.
+Fulcrum is a **distributed workflow orchestration platform** for fulfillment-like processes.
+It coordinates long-running work across independent services (payment, inventory, warehouse, delivery)
+and stays correct under **retries, duplicates, partial failures, and eventual consistency**.
+
+This repository is intentionally built as microservices to practice:
+
+- Saga orchestration
+- Outbox + Inbox patterns
+- Idempotency + deduplication
+- Retry/DLQ handling
+- Read models and caching
 
 ## Repo layout
 
-- `apps/` — microservices (Intake, Orchestrator, Payment, Inventory, Read Model)
-- `libs/` — shared libraries (logging, event envelope, messaging wrappers, outbox/inbox)
-- `infra/` — local infrastructure (docker compose, config)
-- `docs/` — architecture notes and demos
+- `apps/` — microservices
+  - `intake/` — request intake (creates FulfillmentIntents)
+  - `orchestrator/` — saga engine (workflow state machine)
+  - `payment/` — payment adapter + simulator
+  - `inventory/` — reservations + oversell prevention
+  - `readmodel/` — projections for fast queries + timeline UI
+- `libs/` — shared libraries (contracts, messaging, observability, outbox/inbox)
+- `infra/` — local infrastructure (docker compose)
+- `docs/` — architecture + demos
 
-## Status
+## Docs
 
-Scaffolding in progress.
+- `docs/architecture.md` — system design and event flow
+- `docs/local-dev.md` — run infra locally
