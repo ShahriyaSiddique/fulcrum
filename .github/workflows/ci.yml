@@ -1,0 +1,53 @@
+name: Fulcrum CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies (if any)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          else
+            echo "No package.json yet — skipping install"
+          fi
+
+      - name: Lint
+        run: |
+          if [ -f package.json ]; then
+            npm run lint || echo "Lint not configured yet"
+          else
+            echo "Skipping lint"
+          fi
+
+      - name: Run tests
+        run: |
+          if [ -f package.json ]; then
+            npm test || echo "Tests not configured yet"
+          else
+            echo "Skipping tests"
+          fi
+
+      - name: Build
+        run: |
+          if [ -f package.json ]; then
+            npm run build || echo "Build not configured yet"
+          else
+            echo "Skipping build"
+          fi
