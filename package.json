@@ -1,0 +1,17 @@
+{
+    "name": "fulcrum",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "libs/*"
+    ],
+    "scripts": {
+        "build": "npm run -ws build",
+        "test": "npm run -ws test --if-present",
+        "lint": "npm run -ws lint --if-present",
+        "format": "npm run -ws format --if-present"
+    },
+    "engines": {
+        "node": ">=20"
+    }
+}
